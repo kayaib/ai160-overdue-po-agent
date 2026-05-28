@@ -326,7 +326,7 @@ function App() {
                                   } : undefined}
                                 >
                                   <img 
-                                    src="/static/299250_email_blue.png" 
+                                    src="/299250_email_blue.png"
                                     alt={isViewOnly ? "View" : "Email"} 
                                     width="16" 
                                     height="16"
@@ -406,7 +406,7 @@ function App() {
                     onClick={handleCloseEmailPopup}
                     disabled={(!isReadOnly && emailSubmitting) || false}
                   >
-                  <img src="/static/298947_sys-cancel_blue.png" alt="Close" width="16" height="16" />
+                  <img src="/298947_sys-cancel_blue.png" alt="Close" width="16" height="16" />
                   {isReadOnly ? 'Close' : 'Cancel'}
                 </button>
                 {!isReadOnly && (
@@ -415,7 +415,7 @@ function App() {
                     onClick={handleSubmitEmail}
                     disabled={emailSubmitting}
                   >
-                    <img src="/static/299103_message-success_white.png" alt="Send" width="16" height="16" />
+                    <img src="/299103_message-success_white.png" alt="Send" width="16" height="16" />
                     {emailSubmitting ? 'Sending...' : 'Send'}
                   </button>
                 )}
@@ -431,7 +431,7 @@ function App() {
           <div className="success-popup-content">
             <div className="success-popup-header">
               <div className="success-popup-icon">
-                <img src="/static/299103_message-success_white.png" alt="Success" width="16" height="16" />
+                <img src="/299103_message-success_white.png" alt="Success" width="16" height="16" />
               </div>
               <div className="success-popup-message">
                 Email sent at {formatDate(successTimestamp)}
