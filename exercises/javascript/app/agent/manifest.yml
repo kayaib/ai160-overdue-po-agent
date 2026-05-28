@@ -1,0 +1,15 @@
+---
+applications:
+  - name: po-agent
+    memory: 512M
+    disk_quota: 512M
+    buildpacks:
+      - nodejs_buildpack
+    command: npx tsx src/server.ts
+    health-check-type: http
+    health-check-http-endpoint: /api/agent/health
+    env:
+      NODE_ENV: production
+      MOCK_SERVER_URL: https://po-mock-server.cfapps.eu10-005.hana.ondemand.com
+    services:
+      - generative-ai-hub

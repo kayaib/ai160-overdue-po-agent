@@ -2,6 +2,9 @@ import 'dotenv/config.js';
 import express from 'express';
 import cors from 'cors';
 import { Router } from 'express';
+import { fileURLToPath } from 'url';
+import { join, dirname } from 'path';
+import { existsSync } from 'fs';
 import { startPurchaseOrderAgent, createNote } from './po-agent';
 import { createLogger} from '@sap-cloud-sdk/util';
 
@@ -96,6 +99,14 @@ router.get('/health', (req: any, res: any) => {
 
 app.use('/api/agent', router);
 
+// Serve built UI static files if present (production / CF deployment)
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const uiDist = join(__dirname, '../public');
+if (existsSync(uiDist)) {
+    app.use(express.static(uiDist));
+    app.get('/{*path}', (_req: any, res: any) => res.sendFile(join(uiDist, 'index.html')));
+    logger.info(`Serving UI from ${uiDist}`);
+}
 
 // Error handling middleware
 app.use((err: any, req: any, res: any, next: any) => {

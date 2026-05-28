@@ -361,7 +361,7 @@ function App() {
         const orderKey = `${selectedOrder.PurchaseOrder}-${selectedOrder.PurchaseOrderItem}`;
         const hasSentEmail = sentEmails.has(orderKey);
         const sentContent = sentEmailContent.get(orderKey);
-        const isReadOnly = selectedOrder.ExistingNote || hasSentEmail;
+        const isReadOnly = !!(selectedOrder.ExistingNote || hasSentEmail);
         
         return (
           <div className="modal-overlay" onClick={handleCloseEmailPopup}>

@@ -1,0 +1,5 @@
+node_modules/
+.env
+dist/
+*.log
+# public/ is intentionally NOT ignored — contains the built UI

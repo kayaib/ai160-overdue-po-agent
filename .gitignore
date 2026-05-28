@@ -6,6 +6,11 @@
 *.env
 node_modules/
 
+# Build output
+dist/
+exercises/javascript/app/agent/public/
+exercises/javascript/app/ui/dist/
+
 # OS generated files
 .DS_Store
 .DS_Store?

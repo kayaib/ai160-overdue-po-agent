@@ -1,0 +1,11 @@
+---
+applications:
+  - name: po-mock-server
+    memory: 256M
+    disk_quota: 256M
+    buildpacks:
+      - nodejs_buildpack
+    command: npx tsx src/server.ts
+    health-check-type: port
+    env:
+      NODE_ENV: production
