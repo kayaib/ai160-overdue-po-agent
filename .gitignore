@@ -1,6 +1,11 @@
 # IDE files
 .idea/
 
+# Environment / credentials — never commit
+.env
+*.env
+node_modules/
+
 # OS generated files
 .DS_Store
 .DS_Store?

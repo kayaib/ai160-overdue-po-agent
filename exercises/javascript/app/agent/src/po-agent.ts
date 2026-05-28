@@ -17,25 +17,25 @@ import { buildAzureContentSafetyFilter, buildDpiMaskingProvider } from '@sap-ai-
 
 // Define the tools for the agent to use
 const tools: any[] = [
-    // getPurchaseOrderItemsTool,
-    // calculateOverdueTool,
-    // formatPurchaseOrdersTool,
-    // createNoteTool
+    getPurchaseOrderItemsTool,
+    calculateOverdueTool,
+    formatPurchaseOrdersTool,
+    createNoteTool
 ];
 
 // Create a ToolNode with the defined tools
 const toolNode = new ToolNode(tools);
 
 // Create a model and give it access to the tools
-// const model = new OrchestrationClient({
-//     promptTemplating: {
-//         model: {
-//             name: 'anthropic--claude-4.5-haiku'
-//         }
-//     }
-// }, { maxRetries: 0 });
+const model = new OrchestrationClient({
+    promptTemplating: {
+        model: {
+            name: 'anthropic--claude-4.5-haiku'
+        }
+    }
+}, { maxRetries: 0 });
 
-// const modelWithTools = model.bindTools(tools);
+const modelWithTools = model.bindTools(tools);
 
 async function shouldContinueAgent({ messages }: typeof MessagesAnnotation.State) {
     const lastMessage = messages.at(-1) as AIMessage;
@@ -47,8 +47,8 @@ async function shouldContinueAgent({ messages }: typeof MessagesAnnotation.State
 
 // Define the function that calls the model
 async function callModel({ messages }: typeof MessagesAnnotation.State) {
-    // const response = await modelWithTools.invoke(messages);
-    // return { messages: [response] };
+    const response = await modelWithTools.invoke(messages);
+    return { messages: [response] };
 }
 
 const workflow = new StateGraph(MessagesAnnotation)
@@ -131,13 +131,11 @@ Always confirm successful note creation to the user.
 }
 
 export async function createNote(note: any, config: any): Promise<MessageContent | undefined> {
-//     const humanMessage = `Please create a note for the following purchase order item:
-// Purchase Order: ${note.purchaseOrder}
-// Purchase Order Item: ${note.purchaseOrderItem}
-// Note Text: ${note.noteText}
-// `;
-
-//     let response = await app.invoke({ messages: [humanMessage] }, config);
-//     return response.messages.at(-1)?.content;
-       return;
+    const humanMessage = `Please create a note for the following purchase order item:
+Purchase Order: ${note.purchaseOrder}
+Purchase Order Item: ${note.purchaseOrderItem}
+Note Text: ${note.noteText}
+`;
+    let response = await app.invoke({ messages: [humanMessage] }, config);
+    return response.messages.at(-1)?.content;
 }

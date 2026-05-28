@@ -14,7 +14,7 @@ export type CreateNoteRequestParam = {
 
 export const createNoteTool = tool(
     async (notesInfo: CreateNoteRequestParam) => {
-        // return createNote(notesInfo);
+        return createNote(notesInfo);
     },
     {
         name: 'create_note',
